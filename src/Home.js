@@ -43,10 +43,7 @@ function Home () {
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
-          <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-
-          <h1>Penyegaran TL</h1>
+          <h1>@Penyegaran_TL</h1>
 
           <div className='cardContainer'>
             {/* last card ketika sudah semua diswipe */}
@@ -62,6 +59,7 @@ function Home () {
             {characters.map((character) =>
               <TinderCard
                 className='swipe'
+                preventSwipe={['down']}
                 key={character.id}
                 ref={childRefs.current[character.id]}
                 onSwipe={(dir) => swiped(dir, character.id)}
