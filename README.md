@@ -11,6 +11,8 @@ yarn
 yarn start
 ```
 
+Open at `localhost:3000`
+
 Look for files in
 - `src/server.js`
 - `src/Home.js`
