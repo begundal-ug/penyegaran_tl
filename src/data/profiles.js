@@ -1,10 +1,8 @@
-const penyegaran = require('./penyegaran');
+const raw = require('./raw');
 const short = require('short-uuid');
 
-const getRandom = async (n = 5) => {
-	const { most_favourite, most_shareable, people_love_most } = penyegaran.annual;
-    const data = [...people_love_most, ...most_favourite, ...most_shareable];
-    const userData = data.map(dt => {
+const getRandom = async (n = 8) => {
+    const userData = raw.map(dt => {
         return {
             id: short.generate(),
             img: dt.media[0],
@@ -13,7 +11,7 @@ const getRandom = async (n = 5) => {
             date: dt.date_created,
         }
     });
-    const randUserData = userData.sort(() => Math.random() - Math.random()).slice(0, 8);
+    const randUserData = userData.sort(() => Math.random() - Math.random()).slice(0, n);
 
     return randUserData;
 }

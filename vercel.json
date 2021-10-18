@@ -1,6 +1,6 @@
 {
     "name": "penyegaran_tl",
-    "version": 1,
+    "version": 2,
     "builds": [
         {
             "src": "build/public/**",
