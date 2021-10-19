@@ -66,7 +66,7 @@ function Home () {
                 onCardLeftScreen={() => outOfFrame(character.id)}
               >
                 <div style={{ backgroundImage: `url(${character.img})` }} className='card'>
-                  <h3>{`Score: ${character.likes}`}</h3>
+                  <h3>{`like+rt: ${character.likes}`}</h3>
                 </div>
               </TinderCard>
             )}
@@ -75,8 +75,9 @@ function Home () {
           <div className='buttons'>
             <button onClick={() => undo()}>Undo</button>
           </div>
-
-          {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+          <h2 className='infoText'>
+            {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
+          </h2>
         </>
       )}
     </div>

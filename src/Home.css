@@ -5,8 +5,8 @@
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  /* background: linear-gradient(#e66465, #9198e5); */
-  background: linear-gradient(var(--white-bold-tw), var(--white-tw)) /*// light mode*/;
+  /* background: linear-gradient(#e66465, #9198e5); /* default mode */
+  background: linear-gradient(var(--white-bold-tw), var(--white-tw)) /* light mode*/;
   /*background: linear-gradient(var(--night-dim-bold-tw), var(--night-dim-tw)); /* night mode*/
 }
 
@@ -88,7 +88,7 @@ h2 {
   height: 28px;
   justify-content: center;
   display: flex;
-  color: var(--white-tw);
+  color: var(--black-tw);
   animation-name: popup;
   animation-duration: 800ms;
 }
