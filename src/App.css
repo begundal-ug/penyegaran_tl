@@ -48,11 +48,17 @@ body {
 
 :root {
   --blue-tw: #1DA1F2;
+  --blue-tint-tw: #1D8DEE;
   --light-blue-tw: #36D8FF;
   --white-tw: #F5F8FA; 
+  --white-bold-tw: #FFF; 
   --grey-tw: #AAB8C2; 
   --light-grey-tw: #E1E8ED; 
   --dark-grey-tw: #657786; 
   --black-tw: #14171A;
   --black-bold-tw: #000;
+  /* --night-dim-tw: #243447; */
+  --night-dim-tw: #1B2737;
+  /* --night-dim-bold-tw: #141d26; */
+  --night-dim-bold-tw: #151E29;
 }
