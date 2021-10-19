@@ -43,10 +43,7 @@ function Home () {
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
-          <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-
-          <h1>Penyegaran TL</h1>
+          <h1>@Penyegaran_TL</h1>
 
           <div className='cardContainer'>
             {/* last card ketika sudah semua diswipe */}
@@ -62,13 +59,14 @@ function Home () {
             {characters.map((character) =>
               <TinderCard
                 className='swipe'
+                preventSwipe={['down']}
                 key={character.id}
                 ref={childRefs.current[character.id]}
                 onSwipe={(dir) => swiped(dir, character.id)}
                 onCardLeftScreen={() => outOfFrame(character.id)}
               >
                 <div style={{ backgroundImage: `url(${character.img})` }} className='card'>
-                  <h3>{`Score: ${character.likes}`}</h3>
+                  <h3>{`like+rt: ${character.likes}`}</h3>
                 </div>
               </TinderCard>
             )}
@@ -77,8 +75,9 @@ function Home () {
           <div className='buttons'>
             <button onClick={() => undo()}>Undo</button>
           </div>
-
-          {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+          <h2 className='infoText'>
+            {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
+          </h2>
         </>
       )}
     </div>
