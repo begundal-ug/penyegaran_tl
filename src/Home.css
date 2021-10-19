@@ -6,7 +6,8 @@
   min-height: 100vh;
   overflow: hidden;
   /* background: linear-gradient(#e66465, #9198e5); */
-  background: linear-gradient(var(--black-tw), var(--black-bold-tw));
+  background: linear-gradient(var(--white-bold-tw), var(--white-tw)) /*// light mode*/;
+  /*background: linear-gradient(var(--night-dim-bold-tw), var(--night-dim-tw)); /* night mode*/
 }
 
 #root>div {
@@ -33,7 +34,8 @@
 
 h1 {
   font-family: 'TinderFont', cursive;
-  color: var(--white-tw);
+  color: var(--dark-grey-tw); /*light-mode*/
+  /*color: var(--white-tw); /*night-mode*/
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
 }
 
@@ -57,7 +59,8 @@ h2 {
   width: 80vw;
   max-width: 260px;
   height: 300px;
-  box-shadow: 0px 0px 17px 0px rgba(245, 248, 250, 0.10);
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.10); /*light-mode*/
+  /*box-shadow: 0px 0px 10px 0px rgba(256, 256, 256, 0.10); /*night-mode*/
   border-radius: 20px;
   background-size: cover;
   background-position: center;
