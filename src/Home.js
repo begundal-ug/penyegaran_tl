@@ -1,45 +1,63 @@
-import React, { useState, useRef } from 'react';
-import { useQuery } from 'react-query';
+import React, { useState, useRef, useEffect } from 'react';
+import { useQuery, useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
 import { fetchRandom } from './api/profiles';
+import Like from './components/like/like';
+
+const REFETCH_THRESHOLD = 2
 
 function Home () {
-  const [lastDirection, setLastDirection] = useState()
-  const [alreadyRemoved, setAlreadyRemoved] = useState([])
+  const [lastDirection, setLastDirection] = useState('')
+  const swipedGirls = useRef([])
   const childRefs = useRef({});
-
-  const { data: characters, error, isLoading, isError, isFetching } = useQuery(
-    ['profiles'],
-    () => fetchRandom(),
-  )
-
+  
+  const {
+    status,
+    data,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage
+  } = useInfiniteQuery('randomgirls', fetchRandom, {
+      getNextPageParam: (lastPage, pages) => true, // lastPage.nextCursor,
+  })
+  
+  const allGirls = data && ('pages' in data) ? data.pages.flat() : []
+  
   const swiped = (direction, id) => {
-    const person = characters.find((item) => item.id === id);
-    console.log('removing', person)
-    setLastDirection(direction)
-    setAlreadyRemoved(alreadyRemoved.concat(id))
+    const girl = allGirls.find((item) => item.id === id);
+    console.log('removing', girl);
+    setLastDirection(direction);
+    swipedGirls.current = swipedGirls.current.concat(id);
+    console.log(`Seen: ${allGirls.length}, swiped: ${swipedGirls.current.length}.`)
+    
+    if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
+      console.log(`GET MORE GIRLS! Seen: ${allGirls.length}, swiped: ${swipedGirls.current.length}.`)
+      fetchNextPage()
+    }
   }
 
+  const shouldFetch = () => (allGirls.length - swipedGirls.current.length) <= REFETCH_THRESHOLD
+
   const outOfFrame = (id) => {
-    const person = characters.find((item) => item.id === id);
+    const person = allGirls.find((item) => item.id === id);
     console.log('left the screen', person)
   }
 
   const undo = () => {
-    if (alreadyRemoved.length === 0) return;
-    const id = alreadyRemoved[alreadyRemoved.length - 1];
+    if (swipedGirls.current.length === 0) return;
+    const id = swipedGirls.current[swipedGirls.current.length - 1];
     childRefs.current[id].current.restoreCard();
   }
 
-  for (const character of (characters || [])) {
-    childRefs.current[character.id] = childRefs.current[character.id] || React.createRef();
+  for (const girl of (allGirls || [])) {
+    childRefs.current[girl.id] = childRefs.current[girl.id] || React.createRef();
   }
 
   return (
     <div>
-      {isLoading || isFetching ? (
+      { status === 'loading' ? (
         <p>Loading...</p>
-      ) : isError ? (
+      ) : status === 'error' ? (
         <p>Error: {error.message}</p>
       ) : (
         <>
@@ -55,20 +73,21 @@ function Home () {
               preventSwipe={['left', 'right', 'up', 'down']}
             >
               <div style={{ backgroundImage: `url(https://via.placeholder.com/500x500.png?text=habis+bray.+ty+ty!)` }} className='card'>
-                <h3>habis :(</h3>
+                {/* <p>habis :(</p> */}
               </div>
             </TinderCard>
 
-            {characters.map((character) =>
+            {allGirls.map((girl) =>
               <TinderCard
                 className='swipe'
-                key={character.id}
-                ref={childRefs.current[character.id]}
-                onSwipe={(dir) => swiped(dir, character.id)}
-                onCardLeftScreen={() => outOfFrame(character.id)}
+                key={girl.id}
+                ref={childRefs.current[girl.id]}
+                onSwipe={(dir) => swiped(dir, girl.id)}
+                onCardLeftScreen={() => outOfFrame(girl.id)}
               >
-                <div style={{ backgroundImage: `url(${character.img})` }} className='card'>
-                  <h3>{`Score: ${character.likes}`}</h3>
+                <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
+                  <Like count={girl.likes} />
+                  
                 </div>
               </TinderCard>
             )}

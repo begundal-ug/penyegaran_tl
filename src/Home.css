@@ -46,19 +46,21 @@ h2 {
 }
 
 .cardContainer {
-  width: 90vw;
-  max-width: 260px;
-  height: 300px;
+  width: 100vw;
+  max-width: 540px;
+  height: 540px;
+  max-height: 100vw;
 }
 
 .card {
   position: relative;
   background-color: #fff;
-  width: 80vw;
-  max-width: 260px;
-  height: 300px;
-  box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
-  border-radius: 20px;
+  width: 100vw;
+  max-width: 540px;
+  height: 540px;
+  max-height: 100vw;
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.08);
+  border-radius: 4px;
   background-size: cover;
   background-position: center;
 }
@@ -72,12 +74,9 @@ h2 {
 
 }
 
-.card h3 {
+.card .badge.like {
   position: absolute;
   bottom: 0;
-  margin: 10px;
-  color: #fff;
-  text-shadow: 0 0 10px #000;
 }
 
 .infoText {
