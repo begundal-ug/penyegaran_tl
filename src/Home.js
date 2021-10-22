@@ -4,7 +4,7 @@ import TinderCard from './libs/react-tinder-card';
 import { fetchRandom } from './api/profiles';
 import Like from './components/like/like';
 
-const REFETCH_THRESHOLD = 2
+const REFETCH_THRESHOLD = 3
 
 function Home () {
   const [lastDirection, setLastDirection] = useState('')
@@ -49,6 +49,8 @@ function Home () {
     childRefs.current[id].current.restoreCard();
   }
 
+  const swipe = () => {}
+
   for (const girl of (allGirls || [])) {
     childRefs.current[girl.id] = childRefs.current[girl.id] || React.createRef();
   }
@@ -61,10 +63,7 @@ function Home () {
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
-          <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
-
-          <h1>Penyegaran TL</h1>
+          <h1>@Penyegaran_TL</h1>
 
           <div className='cardContainer'>
             {/* last card ketika sudah semua diswipe */}
@@ -72,14 +71,13 @@ function Home () {
               className='swipe'
               preventSwipe={['left', 'right', 'up', 'down']}
             >
-              <div style={{ backgroundImage: `url(https://via.placeholder.com/500x500.png?text=habis+bray.+ty+ty!)` }} className='card'>
-                {/* <p>habis :(</p> */}
-              </div>
+              <div style={{ backgroundImage: `url(https://via.placeholder.com/500x500.png?text=habis+bray.+ty+ty!)` }} className='card' />
             </TinderCard>
 
             {allGirls.map((girl) =>
               <TinderCard
                 className='swipe'
+                preventSwipe={['down']}
                 key={girl.id}
                 ref={childRefs.current[girl.id]}
                 onSwipe={(dir) => swiped(dir, girl.id)}
@@ -87,17 +85,21 @@ function Home () {
               >
                 <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
                   <Like count={girl.likes} />
-                  
                 </div>
               </TinderCard>
             )}
           </div>
 
           <div className='buttons'>
-            <button onClick={() => undo()}>Undo</button>
+            <button className="dislike" onClick={() => swipe('left') }>MEH 👎</button>
+            <button className="like" onClick={() => swipe('right') }>YEAH 👍</button>
           </div>
-
-          {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+          <div className='buttons'>
+            <button className="undo" onClick={() => undo() }>Undo</button>
+          </div>
+          <h2 className='infoText'>
+            {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
+          </h2>
         </>
       )}
     </div>

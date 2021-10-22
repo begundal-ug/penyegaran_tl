@@ -5,8 +5,9 @@
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  /* background: linear-gradient(#fff, #999); */
-  background: linear-gradient(#e66465, #9198e5);
+  /* background: linear-gradient(#e66465, #9198e5); /* default mode */
+  background: linear-gradient(var(--white-bold-tw), var(--white-tw)) /* light mode*/;
+  /*background: linear-gradient(var(--night-dim-bold-tw), var(--night-dim-tw)); /* night mode*/
 }
 
 #root>div {
@@ -32,13 +33,14 @@
 }
 
 h1 {
-  font-family: 'Damion', cursive;
-  color: #fff;
+  font-family: 'TinderFont', cursive;
+  color: var(--dark-grey-tw); /*light-mode*/
+  /*color: var(--white-tw); /*night-mode*/
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
 }
 
 h2 {
-  color: #fff;
+  color: var(--white-tw);
 }
 
 .swipe {
@@ -54,13 +56,14 @@ h2 {
 
 .card {
   position: relative;
-  background-color: #fff;
+  background-color: var(--white-tw);
   width: 100vw;
   max-width: 540px;
   height: 540px;
   max-height: 100vw;
-  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.08);
-  border-radius: 4px;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.10); /*light-mode*/
+  /*box-shadow: 0px 0px 10px 0px rgba(256, 256, 256, 0.10); /*night-mode*/
+  border-radius: 8px;
   background-size: cover;
   background-position: center;
 }
@@ -70,9 +73,9 @@ h2 {
   height: 100%;
 }
 
-.swipe:last-of-type {
+/* .swipe:last-of-type {
 
-}
+} */
 
 .card .badge.like {
   position: absolute;
@@ -84,7 +87,7 @@ h2 {
   height: 28px;
   justify-content: center;
   display: flex;
-  color: #fff;
+  color: var(--black-tw);
   animation-name: popup;
   animation-duration: 800ms;
 }
@@ -99,14 +102,31 @@ h2 {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  color: #fff;
+  color: var(--dark-grey-tw);
   font-size: 18px;
-  background-color: #9198e5;
+  font-family: 'TwitterChirp', cursive;
+  background-color: var(--white-tw);
   transition: 200ms;
   margin: 0 10px;
-  font-weight: bolder;
-  width: 160px;
+  font-weight: bold;
+  width: 120px;
   box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+  cursor: pointer;
+}
+
+.buttons button.like {
+  background-color: var(--green-light-tw);
+  color: var(--green-tw);
+}
+
+.buttons button.dislike {
+  background-color: var(--red-light-tw);
+  color: var(--red-tw);
+}
+
+.buttons button.undo {
+  border: 1px solid var(--light-grey-tw);
+  font-weight: normal;
 }
 
 .buttons button:hover {
