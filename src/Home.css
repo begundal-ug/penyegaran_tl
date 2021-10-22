@@ -124,11 +124,6 @@ h2 {
   color: var(--red-tw);
 }
 
-.buttons button.undo {
-  border: 1px solid var(--light-grey-tw);
-  font-weight: normal;
-}
-
 .buttons button:hover {
   transform: scale(1.05);
 }

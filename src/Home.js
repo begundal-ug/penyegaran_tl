@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useQuery, useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
 import { fetchRandom } from './api/profiles';
 import Like from './components/like/like';
@@ -27,7 +27,7 @@ function Home () {
     const girl = allGirls.find((item) => item.id === id);
     console.log('removing', girl);
     setLastDirection(direction);
-    swipedGirls.current = swipedGirls.current.concat(id);
+    swipedGirls.current.push(id);
     console.log(`Seen: ${allGirls.length}, swiped: ${swipedGirls.current.length}.`)
     
     if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
@@ -41,12 +41,6 @@ function Home () {
   const outOfFrame = (id) => {
     const person = allGirls.find((item) => item.id === id);
     console.log('left the screen', person)
-  }
-
-  const undo = () => {
-    if (swipedGirls.current.length === 0) return;
-    const id = swipedGirls.current[swipedGirls.current.length - 1];
-    childRefs.current[id].current.restoreCard();
   }
 
   const swipe = () => {}
@@ -93,9 +87,6 @@ function Home () {
           <div className='buttons'>
             <button className="dislike" onClick={() => swipe('left') }>MEH 👎</button>
             <button className="like" onClick={() => swipe('right') }>YEAH 👍</button>
-          </div>
-          <div className='buttons'>
-            <button className="undo" onClick={() => undo() }>Undo</button>
           </div>
           <h2 className='infoText'>
             {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
