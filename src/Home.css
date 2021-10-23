@@ -48,20 +48,22 @@ h2 {
 }
 
 .cardContainer {
-  width: 90vw;
-  max-width: 260px;
-  height: 300px;
+  width: 100vw;
+  max-width: 540px;
+  height: 540px;
+  max-height: 100vw;
 }
 
 .card {
   position: relative;
   background-color: var(--white-tw);
-  width: 80vw;
-  max-width: 260px;
-  height: 300px;
+  width: 100vw;
+  max-width: 540px;
+  height: 540px;
+  max-height: 100vw;
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.10); /*light-mode*/
   /*box-shadow: 0px 0px 10px 0px rgba(256, 256, 256, 0.10); /*night-mode*/
-  border-radius: 20px;
+  border-radius: 8px;
   background-size: cover;
   background-position: center;
 }
@@ -75,12 +77,9 @@ h2 {
 
 } */
 
-.card h3 {
+.card .badge.like {
   position: absolute;
   bottom: 0;
-  margin: 10px;
-  color: var(--white-tw);
-  text-shadow: 0 0 10px #000;
 }
 
 .infoText {
@@ -103,15 +102,26 @@ h2 {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  color: var(--white-tw);
+  color: var(--dark-grey-tw);
   font-size: 18px;
   font-family: 'TwitterChirp', cursive;
-  background-color: var(--blue-tw);
+  background-color: var(--white-tw);
   transition: 200ms;
   margin: 0 10px;
-  font-weight: bolder;
+  font-weight: bold;
   width: 120px;
   box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+  cursor: pointer;
+}
+
+.buttons button.like {
+  background-color: var(--green-light-tw);
+  color: var(--green-tw);
+}
+
+.buttons button.dislike {
+  background-color: var(--red-light-tw);
+  color: var(--red-tw);
 }
 
 .buttons button:hover {
