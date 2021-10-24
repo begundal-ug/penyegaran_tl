@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
 import { fetchRandom } from './api/profiles';
@@ -19,6 +19,10 @@ function Home () {
     fetchNextPage
   } = useInfiniteQuery('randomgirls', fetchRandom, {
       getNextPageParam: (lastPage, pages) => true, // lastPage.nextCursor,
+      select : data => ({
+        pages: [...data.pages].reverse(),
+        pageParams: [...data.pageParams].reverse()
+      }),
   })
   
   const allGirls = data && ('pages' in data) ? data.pages.flat() : []
@@ -36,7 +40,7 @@ function Home () {
     }
   }
 
-  const shouldFetch = () => (allGirls.length - swipedGirls.current.length) <= REFETCH_THRESHOLD
+  const shouldFetch = () => (allGirls.length - swipedGirls.current.length) === REFETCH_THRESHOLD
 
   const outOfFrame = (id) => {
     const person = allGirls.find((item) => item.id === id);
