@@ -114,6 +114,11 @@ h2 {
   cursor: pointer;
 }
 
+.buttons button.tweet {
+  background-color: var(--blue-tint-tw);
+  color: var(--white-tw);
+}
+
 .buttons button.like {
   background-color: var(--green-light-tw);
   color: var(--green-tw);

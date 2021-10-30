@@ -89,8 +89,7 @@ function Home () {
           </div>
 
           <div className='buttons'>
-            <button className="dislike" onClick={() => swipe('left') }>MEH 👎</button>
-            <button className="like" onClick={() => swipe('right') }>YEAH 👍</button>
+            <button className="tweet" onClick={() => console.log("hit URL") }>See Tweet</button>
           </div>
           <h2 className='infoText'>
             {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
