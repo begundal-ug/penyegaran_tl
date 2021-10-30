@@ -1,25 +1,25 @@
 @font-face {
   font-family: TwitterChirpExtendedHeavy;
-  src: url(https://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff2) format('woff2');
-  src: url(https://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff) format('woff');
+  src: url(fonts/chirp-extended-heavy-web.woff2) format("woff2");
+  src: url(fonts/chirp-extended-heavy-web.woff) format("woff");
   font-weight: 800;
-  font-style: 'normal';
-  font-display: 'swap';
+  font-style: "normal";
+  font-display: "swap";
 }
 @font-face {
   font-family: TwitterChirp;
-  src: url(https://abs.twimg.com/fonts/v2/chirp-regular-web.woff2) format('woff2');
-  src: url(https://abs.twimg.com/fonts/v2/chirp-regular-web.woff) format('woff');
+  src: url(fonts/chirp-regular-web.woff2) format("woff2");
+  src: url(fonts/chirp-regular-web.woff) format("woff");
   font-weight: 400;
-  font-style: 'normal';
-  font-display: 'swap';
+  font-style: "normal";
+  font-display: "swap";
 }
 @font-face {
   font-family: TinderFont;
-  src: url(https://tinder.com/static/build/fonts/4c112e110a336202365ba00324390d27.woff2) format('woff2');
+  src: url(fonts/4c112e110a336202365ba00324390d27.woff2) format("woff2");
   font-weight: 800;
-  font-style: 'normal';
-  font-display: 'swap';
+  font-style: "normal";
+  font-display: "swap";
 }
 
 /* @font-face {
@@ -43,24 +43,24 @@ body {
   margin: 0;
   padding: 0;
   /* font-family: sans-serif; */
-  font-family: 'TwitterChirp', cursive;
+  font-family: "TwitterChirp", cursive;
 }
 
 :root {
-  --blue-tw: #1DA1F2;
-  --blue-tint-tw: #1D8DEE;
-  --light-blue-tw: #36D8FF;
-  --white-tw: #F5F8FA; 
-  --white-bold-tw: #FFF; 
-  --grey-tw: #AAB8C2; 
-  --light-grey-tw: #E1E8ED; 
-  --dark-grey-tw: #657786; 
-  --black-tw: #14171A;
+  --blue-tw: #1da1f2;
+  --blue-tint-tw: #1d8dee;
+  --light-blue-tw: #36d8ff;
+  --white-tw: #f5f8fa;
+  --white-bold-tw: #fff;
+  --grey-tw: #aab8c2;
+  --light-grey-tw: #e1e8ed;
+  --dark-grey-tw: #657786;
+  --black-tw: #14171a;
   --black-bold-tw: #000;
   /* --night-dim-tw: #243447; */
-  --night-dim-tw: #1B2737;
+  --night-dim-tw: #1b2737;
   /* --night-dim-bold-tw: #141d26; */
-  --night-dim-bold-tw: #151E29;
+  --night-dim-bold-tw: #151e29;
   --green-tw: #00ba7c;
   --green-light-tw: rgba(0, 186, 124, 0.2);
   --red-tw: #f91880;
