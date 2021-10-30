@@ -2,8 +2,23 @@ const raw = require('./raw');
 const rawNew = require('./raw-new');
 const short = require('short-uuid');
 
+function pickRandom(arr, n) {
+    let result = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+        const x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
+}
+
 const getRandom = async (n = 8) => {
-    const userData = raw.map(dt => {
+    const randData = pickRandom(raw, n);
+    const randUserData = randData.map(dt => {
         return {
             id: short.generate(),
             img: dt.media[0],
@@ -12,13 +27,12 @@ const getRandom = async (n = 8) => {
             date: dt.date_created,
         }
     });
-    const randUserData = userData.sort(() => Math.random() - Math.random()).slice(0, n);
 
     return randUserData;
 }
 
 const getRandomNew = async (n = 8) => {
-    const randUserData = rawNew.sort(() => Math.random() - Math.random()).slice(0, n);
+    const randUserData = pickRandom(rawNew, n);
 
     return randUserData;
 }
