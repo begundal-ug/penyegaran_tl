@@ -8,7 +8,7 @@ const REFETCH_THRESHOLD = 3
 
 function Home () {
   const [lastDirection, setLastDirection] = useState('')
-  const swipedGirls = useRef([])
+  const removedGirls = useRef([])
   const childRefs = useRef({});
   
   const {
@@ -29,25 +29,56 @@ function Home () {
   
   const swiped = (direction, id) => {
     const girl = allGirls.find((item) => item.id === id);
-    console.log('removing', girl);
+    console.log('swiping ', girl);
     setLastDirection(direction);
-    swipedGirls.current.push(id);
-    console.log(`Seen: ${allGirls.length}, swiped: ${swipedGirls.current.length}.`)
-    
+  }
+  
+  const shouldFetch = () => (allGirls.length - removedGirls.current.length) === REFETCH_THRESHOLD
+  
+  const outOfFrame = (id) => {
+    const person = allGirls.find((item) => item.id === id);
+    console.log('left the screen', person)
+
+    removedGirls.current.push(id);
+    console.log(`Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
+
     if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
-      console.log(`GET MORE GIRLS! Seen: ${allGirls.length}, swiped: ${swipedGirls.current.length}.`)
+      console.log(`GET MORE GIRLS! Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
       fetchNextPage()
     }
   }
 
-  const shouldFetch = () => (allGirls.length - swipedGirls.current.length) === REFETCH_THRESHOLD
+  const swipe = () => {}
 
-  const outOfFrame = (id) => {
-    const person = allGirls.find((item) => item.id === id);
-    console.log('left the screen', person)
+  const getCurrent = () => {
+    const swiped = removedGirls.current.length
+    const total = allGirls.length
+    return allGirls[total-1-swiped]
   }
 
-  const swipe = () => {}
+  const onShareTweet = () => {
+    const currentGirl = getCurrent()
+    console.log("Hit twitter URL: ", currentGirl.link_display )
+    
+    const url = buildTweetIntentUrl({
+      text : "seger nih, cekidot banyak banget di",
+      image : currentGirl.link_display,
+      via : "penyegaran_tl",
+      url : "https://penyegaran.ml",
+      hashtags: "penyegaran_ml"
+    })
+
+    window.open(url, '_blank')
+  }
+
+  const buildTweetIntentUrl = ({text, url, image, via, hashtags}) => (
+    "https://twitter.com/intent/tweet" 
+    +"?text="+ encodeURI(image) + "%20" + encodeURI(text)
+    +"&original_referer=" + encodeURI(url) 
+    +"&url=" + encodeURI(url) 
+    +"&via=" + encodeURI(via) 
+    +"&hashtags=" + encodeURI(hashtags)  
+  )
 
   for (const girl of (allGirls || [])) {
     childRefs.current[girl.id] = childRefs.current[girl.id] || React.createRef();
@@ -89,7 +120,7 @@ function Home () {
           </div>
 
           <div className='buttons'>
-            <button className="tweet" onClick={() => console.log("hit URL") }>See Tweet</button>
+            <button className="tweet" onClick={ onShareTweet }>Share on Twitter</button>
           </div>
           <h2 className='infoText'>
             {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
