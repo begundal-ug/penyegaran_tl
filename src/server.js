@@ -49,43 +49,43 @@ server
       res.redirect(context.url);
     } else {
       res.status(200).send(
-        `<!doctype html>
-    <html lang="">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta charset="utf-8" />
+      `<!doctype html>
+      <html lang="">
+        <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta charset="utf-8" />
 
-        <title>@Penyegaran_TL</title>
+            <title>@Penyegaran_TL</title>
 
-        <link rel="apple-touch-icon" sizes="192x192" href="https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png">
-        <link rel="mask-icon" sizes="any" href="https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89d5.svg" color="#1da1f2">
-        <link rel="shortcut icon" href="//abs.twimg.com/favicons/twitter.ico" type="image/x-icon">
+            <link rel="apple-touch-icon" sizes="192x192" href="https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png">
+            <link rel="mask-icon" sizes="any" href="https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89d5.svg" color="#1da1f2">
+            <link rel="shortcut icon" href="//abs.twimg.com/favicons/twitter.ico" type="image/x-icon">
 
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
-        <meta name="title" content="Penyegaran TL">
-        <meta name="description" content="Curated pics from @penyegaran_tl on your thumb">
-        <meta name="keywords" content="twitter, penyegaran_tl, igo">
-        <meta name="robots" content="noindex, nofollow">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="language" content="English">
-        <meta name="author" content="Begundal UG">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        ${cssLinksFromAssets(assets, 'client')}
-    </head>
-    <body>
-        <div id="root">${markup}</div>
-        ${jsScriptTagsFromAssets(assets, 'client', ' defer crossorigin')}
-    </body>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P18982JP22"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+            <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+            <meta name="title" content="Penyegaran TL">
+            <meta name="description" content="Curated pics from @penyegaran_tl on your thumb">
+            <meta name="keywords" content="twitter, penyegaran_tl, igo">
+            <meta name="robots" content="noindex, nofollow">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <meta name="language" content="English">
+            <meta name="author" content="Begundal UG">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            ${cssLinksFromAssets(assets, 'client')}
+        </head>
+        <body>
+            <div id="root">${markup}</div>
+            ${jsScriptTagsFromAssets(assets, 'client', ' defer crossorigin')}
+        </body>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DECWT3BZWG"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-      gtag('config', 'G-P18982JP22');
-    </script>
-</html>`
+          gtag('config', 'G-DECWT3BZWG');
+        </script>
+      </html>`
       );
     }
   });
