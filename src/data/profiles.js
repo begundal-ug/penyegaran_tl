@@ -1,4 +1,5 @@
 const raw = require('./raw');
+const rawNew = require('./raw-new');
 const short = require('short-uuid');
 
 const getRandom = async (n = 8) => {
@@ -16,6 +17,13 @@ const getRandom = async (n = 8) => {
     return randUserData;
 }
 
+const getRandomNew = async (n = 8) => {
+    const randUserData = rawNew.sort(() => Math.random() - Math.random()).slice(0, n);
+
+    return randUserData;
+}
+
 module.exports = {
     getRandom,
+    getRandomNew,
 }

@@ -6,7 +6,8 @@ import { renderToString } from 'react-dom/server';
 
 const bodyParser = require("body-parser");
 const {
-  getRandom
+  getRandom,
+  getRandomNew,
 } = require('./data');
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
@@ -34,7 +35,8 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/api/random', async (req, res) => {
     // TODO: move this API to foldering path if needed
-    const randUsers = await getRandom();
+    // const randUsers = await getRandom();
+    const randUsers = await getRandomNew();
     res.json(randUsers);
   })
   .get('/*', (req, res) => {
