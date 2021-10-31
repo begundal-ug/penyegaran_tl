@@ -8,6 +8,7 @@ const REFETCH_THRESHOLD = 3
 
 function Home () {
   const [lastDirection, setLastDirection] = useState('')
+  const swipedGirls = useRef([])  // apparently swiped != removed, so we need 2 arrays to maintain :/
   const removedGirls = useRef([])
   const childRefs = useRef({});
   
@@ -30,6 +31,7 @@ function Home () {
   const swiped = (direction, id) => {
     const girl = allGirls.find((item) => item.id === id);
     console.log('swiping ', girl);
+    !swipedGirls.current.includes(id) && swipedGirls.current.push(id)
     setLastDirection(direction);
   }
   
@@ -39,6 +41,7 @@ function Home () {
     const person = allGirls.find((item) => item.id === id);
     console.log('left the screen', person)
 
+    swipedGirls.current.splice(swipedGirls.current.indexOf(id), 1)
     removedGirls.current.push(id);
     console.log(`Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
 
@@ -48,16 +51,19 @@ function Home () {
     }
   }
 
-  const swipe = () => {}
+  const swipe = async (dir) => {
+    const currentGirl = getCurrentlyShownGirl()
+    !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir)
+  }
 
-  const getCurrent = () => {
-    const swiped = removedGirls.current.length
+  const getCurrentlyShownGirl = () => {
+    const swiped = swipedGirls.current.length + removedGirls.current.length
     const total = allGirls.length
     return allGirls[total-1-swiped]
   }
 
   const onShareTweet = () => {
-    const currentGirl = getCurrent()
+    const currentGirl = getCurrentlyShownGirl()
     console.log("Hit twitter URL: ", currentGirl.link_display )
     
     const url = buildTweetIntentUrl({
@@ -117,6 +123,11 @@ function Home () {
                 </div>
               </TinderCard>
             )}
+          </div>
+
+          <div className='buttons'>
+            <button className="dislike" onClick={ () => swipe('left') }>MEH 👎</button>
+            <button className="like" onClick={ () => swipe('right') }>YEAH 👍</button>
           </div>
 
           <div className='buttons'>
