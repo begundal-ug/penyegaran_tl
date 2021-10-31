@@ -13,7 +13,7 @@ function pickRandom(arr, n) {
         result[n] = arr[x in taken ? taken[x] : x];
         taken[x] = --len in taken ? taken[len] : len;
     }
-    return result;
+    return result.map( res => ({...res, id: short.generate() }));
 }
 
 const getRandom = async (n = 8) => {
