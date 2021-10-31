@@ -20,7 +20,7 @@ const getRandom = async (n = 8) => {
     const randData = pickRandom(raw, n);
     const randUserData = randData.map(dt => {
         return {
-            id: short.generate(),
+            id: dt.id,
             img: dt.media[0],
             likes: dt.total_count,
             link: dt.original_link,

@@ -39,8 +39,8 @@ function Home () {
     !swipedGirls.current.includes(id) && swipedGirls.current.push(id)
     setLastDirection(direction);
     sendEvent({
-      category: 'Interaction',
-      action: 'Swiping',
+      category: 'interaction',
+      action: 'swiping',
       label: girl.link_display,
       value: valueDir(direction),
     });
@@ -59,8 +59,8 @@ function Home () {
     if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
       console.log(`GET MORE GIRLS! Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`);
       sendEvent({
-        category: 'Interaction',
-        action: 'Refetch'
+        category: 'interaction',
+        action: 'refetch'
       });
       fetchNextPage();
     }
@@ -70,8 +70,8 @@ function Home () {
     const currentGirl = getCurrentlyShownGirl();
     !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir);
     sendEvent({
-      category: 'Interaction',
-      action: 'Swiping Button',
+      category: 'interaction',
+      action: 'swiping_button',
       label: currentGirl.link_display,
       value: valueDir(dir),
     });
@@ -95,8 +95,8 @@ function Home () {
       hashtags: "penyegaran_ml"
     })
     sendEvent({
-      category: 'Interaction',
-      action: 'Sharing',
+      category: 'interaction',
+      action: 'sharing',
       label: currentGirl.link_display
     });
 
