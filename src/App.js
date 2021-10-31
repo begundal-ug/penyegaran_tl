@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import queryClient from './api/queryClient';
 import useGoogleAnalytics from './libs/use-analytics';
