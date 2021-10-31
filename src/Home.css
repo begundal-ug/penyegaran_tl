@@ -48,19 +48,19 @@ h2 {
 }
 
 .cardContainer {
-  width: 100vw;
+  width: 90vw;
   max-width: 540px;
-  height: 540px;
-  max-height: 100vw;
+  height: 90vw;
+  max-height: 540px;
 }
 
 .card {
   position: relative;
   background-color: var(--white-tw);
-  width: 100vw;
+  width: 90vw;
   max-width: 540px;
   height: 540px;
-  max-height: 100vw;
+  max-height: 90vw;
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.10); /*light-mode*/
   /*box-shadow: 0px 0px 10px 0px rgba(256, 256, 256, 0.10); /*night-mode*/
   border-radius: 8px;
