@@ -37,7 +37,15 @@ const getRandomNew = async (n = 8) => {
     return randUserData;
 }
 
+const getProfileById = async(id) => {
+    const profile = rawNew.find((item) => item.id === +id)
+    return !!profile 
+        ? profile 
+        : { error: `cannot find profile ${id}` }
+}
+
 module.exports = {
     getRandom,
     getRandomNew,
+    getProfileById
 }

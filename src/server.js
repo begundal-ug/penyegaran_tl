@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 const bodyParser = require("body-parser");
 const {
   getRandomNew,
+  getProfileById
 } = require('./data');
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
@@ -36,6 +37,10 @@ server
     // TODO: move this API to foldering path if needed
     const randUsers = await getRandomNew();
     res.json(randUsers);
+  })
+  .get('/api/profile/:id', async (req, res) => {
+    const user = await getProfileById(req.params.id);
+    res.json(user);
   })
   .get('/*', (req, res) => {
     const context = {};
