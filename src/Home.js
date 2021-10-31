@@ -3,14 +3,15 @@ import { useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
 import { fetchRandom } from './api/profiles';
 import Like from './components/like/like';
-import { sendEvent } from './libs/ga-analytics';
+import { sendEvent, sendTwitterShare } from './libs/ga-analytics';
 
 const REFETCH_THRESHOLD = 3
 
 function Home () {
-  const [lastDirection, setLastDirection] = useState('')
-  const swipedGirls = useRef([])  // apparently swiped != removed, so we need 2 arrays to maintain :/
-  const removedGirls = useRef([])
+  const [lastDirection, setLastDirection] = useState('');
+  const [countFetch, setCountFetch] = useState(1);
+  const swipedGirls = useRef([]);  // apparently swiped != removed, so we need 2 arrays to maintain :/
+  const removedGirls = useRef([]);
   const childRefs = useRef({});
   
   const {
@@ -30,19 +31,18 @@ function Home () {
   const allGirls = data && ('pages' in data) ? data.pages.flat() : [];
 
   const valueDir = (dir) => {
-    return (dir == 'left') ? 0 : (dir == 'right') ? 1 : (dir == 'up') ? 2 : 99;
+    return (dir == 'left') ? 'dislike' : 'like';
   }
   
   const swiped = (direction, id) => {
     const girl = allGirls.find((item) => item.id === id);
-    console.log('swiping ', girl);
+    // console.log('swiping ', girl);
     !swipedGirls.current.includes(id) && swipedGirls.current.push(id)
     setLastDirection(direction);
     sendEvent({
       category: 'interaction',
-      action: 'swiping',
-      label: girl.link_display,
-      value: valueDir(direction),
+      action: `swipe_${direction}`,
+      label: girl.link_display
     });
   }
   
@@ -50,17 +50,20 @@ function Home () {
   
   const outOfFrame = (id) => {
     const person = allGirls.find((item) => item.id === id);
-    console.log('left the screen', person)
+    // console.log('left the screen', person);
 
     swipedGirls.current.splice(swipedGirls.current.indexOf(id), 1)
     removedGirls.current.push(id);
     console.log(`Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
 
     if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
-      console.log(`GET MORE GIRLS! Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`);
+      const newCount = countFetch + 1;
+      setCountFetch(newCount);
+      console.log(`GET MORE GIRLS on Page ${newCount}!`);
       sendEvent({
         category: 'interaction',
-        action: 'refetch'
+        action: 'refetch',
+        label: `page_${countFetch}`
       });
       fetchNextPage();
     }
@@ -71,9 +74,8 @@ function Home () {
     !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir);
     sendEvent({
       category: 'interaction',
-      action: 'swiping_button',
+      action: `click_${valueDir(dir)}`,
       label: currentGirl.link_display,
-      value: valueDir(dir),
     });
   }
 
@@ -85,7 +87,7 @@ function Home () {
 
   const onShareTweet = () => {
     const currentGirl = getCurrentlyShownGirl()
-    console.log("Hit twitter URL: ", currentGirl.link_display )
+    console.log("Hit twitter URL: ", currentGirl.link_display);
     
     const url = buildTweetIntentUrl({
       text : "seger nih, cekidot banyak banget di",
@@ -94,11 +96,7 @@ function Home () {
       url : "https://penyegaran.ml",
       hashtags: "penyegaran_ml"
     })
-    sendEvent({
-      category: 'interaction',
-      action: 'sharing',
-      label: currentGirl.link_display
-    });
+    sendTwitterShare(currentGirl.link_display);
 
     window.open(url, '_blank')
   }

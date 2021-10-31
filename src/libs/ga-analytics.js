@@ -9,21 +9,31 @@ function init() {
 }
 
 function sendEvent(payload) {
-  ReactGA.event(payload)
+  ReactGA.event(payload);
 }
 
 function sendPageview(path) {
   ReactGA.set({ page: path })
-  ReactGA.pageview(path)
+  ReactGA.pageview(path);
 }
 
 function sendModalview(path) {
-    ReactGA.modalview(path)
-  }
+  ReactGA.modalview(path);
+}
+
+function sendTwitterShare(link_display) {
+  ReactGA.ga('send', 'social', 'Twitter', 'tweet', link_display);
+}
+
+function sendTwitterOriginal(link_display) {
+  ReactGA.ga('send', 'social', 'Twitter', 'open', link_display);
+}
 
 module.exports = {
   init,
   sendEvent,
   sendPageview,
   sendModalview,
+  sendTwitterShare,
+  sendTwitterOriginal
 }
