@@ -3,6 +3,7 @@ import { useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
 import { fetchRandom } from './api/profiles';
 import Like from './components/like/like';
+import { sendEvent } from './libs/ga-analytics';
 
 const REFETCH_THRESHOLD = 3
 
@@ -26,13 +27,23 @@ function Home () {
       }),
   })
   
-  const allGirls = data && ('pages' in data) ? data.pages.flat() : []
+  const allGirls = data && ('pages' in data) ? data.pages.flat() : [];
+
+  const valueDir = (dir) => {
+    return (dir == 'left') ? 0 : (dir == 'right') ? 1 : (dir == 'up') ? 2 : 99;
+  }
   
   const swiped = (direction, id) => {
     const girl = allGirls.find((item) => item.id === id);
     console.log('swiping ', girl);
     !swipedGirls.current.includes(id) && swipedGirls.current.push(id)
     setLastDirection(direction);
+    sendEvent({
+      category: 'Interaction',
+      action: 'Swiping',
+      label: girl.link_display,
+      value: valueDir(direction),
+    });
   }
   
   const shouldFetch = () => (allGirls.length - removedGirls.current.length) === REFETCH_THRESHOLD
@@ -46,14 +57,24 @@ function Home () {
     console.log(`Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
 
     if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
-      console.log(`GET MORE GIRLS! Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
-      fetchNextPage()
+      console.log(`GET MORE GIRLS! Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`);
+      sendEvent({
+        category: 'Interaction',
+        action: 'Refetch'
+      });
+      fetchNextPage();
     }
   }
 
   const swipe = async (dir) => {
-    const currentGirl = getCurrentlyShownGirl()
-    !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir)
+    const currentGirl = getCurrentlyShownGirl();
+    !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir);
+    sendEvent({
+      category: 'Interaction',
+      action: 'Swiping Button',
+      label: currentGirl.link_display,
+      value: valueDir(dir),
+    });
   }
 
   const getCurrentlyShownGirl = () => {
@@ -73,6 +94,11 @@ function Home () {
       url : "https://penyegaran.ml",
       hashtags: "penyegaran_ml"
     })
+    sendEvent({
+      category: 'Interaction',
+      action: 'Sharing',
+      label: currentGirl.link_display
+    });
 
     window.open(url, '_blank')
   }
