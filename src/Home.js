@@ -155,10 +155,11 @@ function Home () {
           </div>
 
           <div className='buttons'>
-            <button className="tweet" onClick={ onShareTweet }>Share on Twitter</button>
+            <button className="tweet" onClick={ onShareTweet }>Bagikan di Twitter</button>
           </div>
+          
           <h2 className='infoText'>
-            {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
+            {lastDirection ? `` : 'Geser gambar untuk memulai'}
           </h2>
         </>
       )}

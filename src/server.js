@@ -68,11 +68,11 @@ server
 
             <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
             <meta name="title" content="Penyegaran TL">
-            <meta name="description" content="Curated pics from @penyegaran_tl on your thumb">
+            <meta name="description" content="Kurasi koleksi @penyegaran_tl di ujung jarimu">
             <meta name="keywords" content="twitter, penyegaran_tl, igo">
             <meta name="robots" content="noindex, nofollow">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <meta name="language" content="English">
+            <meta name="language" content="Indonesia">
             <meta name="author" content="Begundal UG">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             ${cssLinksFromAssets(assets, 'client')}
