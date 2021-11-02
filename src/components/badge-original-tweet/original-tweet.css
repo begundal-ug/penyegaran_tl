@@ -3,6 +3,11 @@
   color: var(--dark-grey-tw);
 }
 
+.original-tweet:hover {
+  color: var(--white-tw);
+  background-color: var(--blue-tint-tw);
+}
+
 .bird {
   height: 1.2em;
   width: 1.2em;
@@ -14,4 +19,8 @@
 .bird-svg {
   display: inline-block;
   fill: #73A1FB;
+}
+
+.original-tweet:hover .bird-svg {
+  fill: var(--white-tw);
 }

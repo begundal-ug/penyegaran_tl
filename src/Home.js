@@ -80,7 +80,7 @@ function Home () {
     console.log("Hit twitter URL: ", currentGirl.link_display )
     
     const url = buildTweetIntentUrl({
-      text : "seger nih, cekidot banyak yg lain di",
+      text : "seger nih, cekidot di",
       image : currentGirl.link_display,
       via : "penyegaran_tl",
       url : `https://penyegaran.ml/${currentGirl.id}`,
@@ -111,7 +111,7 @@ function Home () {
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <h1>@Penyegaran_TL</h1>
+          <h1>Penyegaran Timeline</h1>
 
           <div className='cardContainer'>
             {/* last card ketika sudah semua diswipe */}
@@ -150,6 +150,18 @@ function Home () {
           <h2 className='infoText'>
             {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
           </h2>
+          <footer>
+            <p>
+              Copyright &copy; Allah SWT dengan segala keindahan ciptaan-Nya.
+              Seluruh kode aplikasi ini tersedia secara secara sumber terbuka dan dapat dilihat, dipelajari, diambil dan digunakan di Github. 
+              Seluruh data dan gambar diambil dari timeline <a href="https://twitter.com/penyegaran_tl" target="_blank">@penyegaran_tl</a> di Twitter. 
+              Jika Anda ingin foto Anda diambil dari website ini, silakan japri langsung dengan pembuat via Twitter<br/>
+            </p>
+            <p>
+              Sebuah karya kurang kerjaan persembahan dari <a href="https://twitter.com/ans4175" target="_blank">@ans4175</a> dengan <a href="https://twitter.com/anwari888" target="_blank">@anwari888</a>, yang ingin berkarya dan belajar saja. 
+              Kami tidak berafiliasi dengan admin dari @penyegaran_tl.
+            </p>
+          </footer>
         </>
       )}
     </div>

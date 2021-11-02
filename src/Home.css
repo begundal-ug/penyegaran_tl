@@ -88,6 +88,7 @@ h2 {
   border-radius: 50px;
   padding: 2px 12px;
   display: inline-block;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.30); /*light-mode*/
 }
 
 .infoText {
@@ -161,6 +162,24 @@ h2 {
 
   .button:hover {
     transform: scale(1.05);
+  }
+
+footer {
+  margin: 3em 0 2em;
+  padding-top: 2em;
+  border-top: 1px solid var(--light-grey-tw);
+  max-width: 720px;
+  width: 85vw;
+}
+
+  footer p {
+    font-size: 0.85em;
+    color: var(--grey-tw);
+    line-height: 140%;
+  }
+
+  footer p a {
+    color: var(--blue-tint-tw);
   }
 
 @keyframes popup {
