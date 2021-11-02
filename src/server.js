@@ -70,7 +70,7 @@ server
             <meta name="title" content="Penyegaran TL">
             <meta name="description" content="Curated pics from @penyegaran_tl on your thumb">
             <meta name="keywords" content="twitter, penyegaran_tl, igo">
-            <meta name="robots" content="noindex, nofollow">
+            <meta name="robots" content="all">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="language" content="English">
             <meta name="author" content="Begundal UG">

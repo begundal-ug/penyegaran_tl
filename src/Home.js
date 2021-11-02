@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useQuery, useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
-import { fetchRandom } from './api/profiles';
+import { fetchProfile, fetchRandom } from './api/profiles';
 import Like from './components/like/like';
+import { useParams } from 'react-router-dom';
 
 const REFETCH_THRESHOLD = 3
 
@@ -25,8 +26,19 @@ function Home () {
         pageParams: [...data.pageParams].reverse()
       }),
   })
+
+  const { profileId } = useParams();
   
-  const allGirls = data && ('pages' in data) ? data.pages.flat() : []
+  const { data: profile } = useQuery(
+    ['profiles'],
+    () => !!profileId ? fetchProfile( profileId ) : false,
+    )
+  
+  const allGirls = data && ('pages' in data)  
+                      ?  profile 
+                        ? [...data.pages.flat(), profile] 
+                        : [...data.pages.flat()]
+                      : []
   
   const swiped = (direction, id) => {
     const girl = allGirls.find((item) => item.id === id);
