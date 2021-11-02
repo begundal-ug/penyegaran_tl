@@ -66,7 +66,7 @@ function Home () {
 
   const swipe = async (dir) => {
     const currentGirl = getCurrentlyShownGirl()
-    !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir)
+    !!currentGirl && childRefs.current[currentGirl.unique_key].current.swipe(dir)
   }
 
   const getCurrentlyShownGirl = () => {
@@ -80,10 +80,10 @@ function Home () {
     console.log("Hit twitter URL: ", currentGirl.link_display )
     
     const url = buildTweetIntentUrl({
-      text : "seger nih, cekidot banyak banget di",
+      text : "seger nih, cekidot banyak yg lain di",
       image : currentGirl.link_display,
       via : "penyegaran_tl",
-      url : "https://penyegaran.ml",
+      url : `https://penyegaran.ml/${currentGirl.id}`,
       hashtags: "penyegaran_ml"
     })
 
@@ -100,7 +100,7 @@ function Home () {
   )
 
   for (const girl of (allGirls || [])) {
-    childRefs.current[girl.id] = childRefs.current[girl.id] || React.createRef();
+    childRefs.current[girl.unique_key] = childRefs.current[girl.unique_key] || React.createRef();
   }
 
   return (
@@ -126,10 +126,10 @@ function Home () {
               <TinderCard
                 className='swipe'
                 preventSwipe={['down']}
-                key={girl.id}
-                ref={childRefs.current[girl.id]}
-                onSwipe={(dir) => swiped(dir, girl.id)}
-                onCardLeftScreen={() => outOfFrame(girl.id)}
+                key={girl.unique_key}
+                ref={childRefs.current[girl.unique_key]}
+                onSwipe={(dir) => swiped(dir, girl.unique_key)}
+                onCardLeftScreen={() => outOfFrame(girl.unique_key)}
               >
                 <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
                   <div className='badge-container'>
