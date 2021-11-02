@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { useQuery, useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
 import { fetchProfile, fetchRandom } from './api/profiles';
-import Like from './components/like/like';
+import BadgeLike from './components/badge-like/like';
+import BadgeOriginalTweet from './components/badge-original-tweet/original-tweet';
 import { useParams } from 'react-router-dom';
 
 const REFETCH_THRESHOLD = 3
@@ -131,20 +132,21 @@ function Home () {
                 onCardLeftScreen={() => outOfFrame(girl.id)}
               >
                 <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
-                  <Like count={girl.likes} />
+                  <div className='badge-container'>
+                    <BadgeLike count={girl.likes} />
+                    <BadgeOriginalTweet link={girl.link} accountName="penyegaran_tl" />
+                  </div>
                 </div>
               </TinderCard>
             )}
           </div>
 
-          <div className='buttons'>
-            <button className="dislike" onClick={ () => swipe('left') }>MEH 👎</button>
-            <button className="like" onClick={ () => swipe('right') }>YEAH 👍</button>
+          <div className="buttons jc-space-between">
+            <button className="button dislike" onClick={ () => swipe('left') }>👎</button>
+            <button className="button tweet" onClick={ onShareTweet }>Share on Twitter</button>
+            <button className="button like" onClick={ () => swipe('right') }>👍</button>
           </div>
 
-          <div className='buttons'>
-            <button className="tweet" onClick={ onShareTweet }>Share on Twitter</button>
-          </div>
           <h2 className='infoText'>
             {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
           </h2>

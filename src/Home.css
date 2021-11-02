@@ -33,10 +33,12 @@
 }
 
 h1 {
-  font-family: 'TinderFont', cursive;
+  font-family: 'TinderFont', "Noto Sans", 'Trebuchet MS', sans-serif;
   color: var(--dark-grey-tw); /*light-mode*/
   /*color: var(--white-tw); /*night-mode*/
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+  margin-top: 0.4em;
+  margin-bottom: 0.5em;
 }
 
 h2 {
@@ -48,19 +50,19 @@ h2 {
 }
 
 .cardContainer {
-  width: 90vw;
+  width: 85vw;
   max-width: 540px;
-  height: 90vw;
+  height: 85vw;
   max-height: 540px;
 }
 
 .card {
   position: relative;
   background-color: var(--white-tw);
-  width: 90vw;
+  width: 85vw;
   max-width: 540px;
   height: 540px;
-  max-height: 90vw;
+  max-height: 85vw;
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.10); /*light-mode*/
   /*box-shadow: 0px 0px 10px 0px rgba(256, 256, 256, 0.10); /*night-mode*/
   border-radius: 8px;
@@ -73,13 +75,19 @@ h2 {
   height: 100%;
 }
 
-/* .swipe:last-of-type {
-
-} */
-
-.card .badge.like {
+.badge-container {
   position: absolute;
+  width: 100%;
   bottom: 0;
+  left: 0;
+  text-align: left;
+}
+
+.badge {  
+  margin: 10px 0 10px 10px;
+  border-radius: 50px;
+  padding: 2px 12px;
+  display: inline-block;
 }
 
 .infoText {
@@ -93,46 +101,67 @@ h2 {
 }
 
 .buttons {
-  margin: 20px;
+  margin: 20px 0;
   display: flex;
+  width: 85vw;
+  max-width: 540px;
 }
 
-.buttons button {
-  flex-shrink: 0;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  color: var(--dark-grey-tw);
-  font-size: 18px;
-  font-family: 'TwitterChirp', cursive;
-  background-color: var(--white-tw);
-  transition: 200ms;
-  margin: 0 10px;
-  font-weight: bold;
-  width: 120px;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
-  cursor: pointer;
+.buttons.jc-space-between {
+  justify-content: space-between;
 }
 
-.buttons button.tweet {
-  width: 200px;
-  background-color: var(--blue-tint-tw);
-  color: var(--white-tw);
+.buttons.jc-center {
+  justify-content: center;
 }
 
-.buttons button.like {
-  background-color: var(--green-light-tw);
-  color: var(--green-tw);
-}
+  .button {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: var(--dark-grey-tw);
+    font-size: 18px;
+    font-family: 'TwitterChirp', cursive;
+    background-color: var(--white-tw);
+    transition: 200ms;
+    margin: 0;
+    font-weight: bold;
+    min-width: 3em;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+    cursor: pointer;
+  }
 
-.buttons button.dislike {
-  background-color: var(--red-light-tw);
-  color: var(--red-tw);
-}
+  .button.tweet {
+    background-color: var(--white-tw);
+    color: var(--blue-tint-tw);
+    border: 1px solid var(--light-grey-tw);
+  }
 
-.buttons button:hover {
-  transform: scale(1.05);
-}
+  .button.tweet:hover {
+    background-color: var(--blue-tint-tw);
+    color: var(--white-tw);
+    border-color: var(--blue-tint-tw);
+  }
+
+  .button.see-tweet {
+    color: var(--blue-tint-tw);
+    box-shadow: none;
+  }
+
+  .button.like {
+    background-color: var(--green-light-tw);
+    color: var(--green-tw);
+  }
+
+  .button.dislike {
+    background-color: var(--red-light-tw);
+    color: var(--red-tw);
+  }
+
+  .button:hover {
+    transform: scale(1.05);
+  }
 
 @keyframes popup {
   0%   { transform: scale(1,1) }
