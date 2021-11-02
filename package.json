@@ -18,16 +18,17 @@
     "p-sleep": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-ga": "^3.3.0",
     "react-query": "^3.26.0",
     "react-router-dom": "^5.2.0",
     "short-uuid": "^4.2.0"
   },
   "devDependencies": {
-    "babel-preset-razzle": "^4.0.6",
+    "babel-preset-razzle": "^4.2.6",
     "html-webpack-plugin": "^4.5.2",
     "mini-css-extract-plugin": "^0.9.0",
-    "razzle": "^4.0.6",
-    "razzle-dev-utils": "^4.0.6",
+    "razzle": "^4.2.6",
+    "razzle-dev-utils": "^4.2.6",
     "webpack": "^4.44.1",
     "webpack-dev-server": "^3.11.2"
   }

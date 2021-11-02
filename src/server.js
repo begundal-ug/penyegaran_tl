@@ -60,7 +60,7 @@ server
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta charset="utf-8" />
 
-            <title>@Penyegaran_TL</title>
+            <title>👩 Penyegaran Timeline</title>
 
             <link rel="apple-touch-icon" sizes="192x192" href="https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png">
             <link rel="mask-icon" sizes="any" href="https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89d5.svg" color="#1da1f2">
@@ -68,11 +68,11 @@ server
 
             <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
             <meta name="title" content="Penyegaran TL">
-            <meta name="description" content="Curated pics from @penyegaran_tl on your thumb">
+            <meta name="description" content="Kurasi koleksi @penyegaran_tl di ujung jarimu">
             <meta name="keywords" content="twitter, penyegaran_tl, igo">
             <meta name="robots" content="all">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <meta name="language" content="English">
+            <meta name="language" content="Indonesia">
             <meta name="author" content="Begundal UG">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             ${cssLinksFromAssets(assets, 'client')}
@@ -81,7 +81,7 @@ server
             <div id="root">${markup}</div>
             ${jsScriptTagsFromAssets(assets, 'client', ' defer crossorigin')}
         </body>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <!-- Global site tag (gtag.js) - Google Analytics
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-DECWT3BZWG"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
@@ -89,7 +89,7 @@ server
           gtag('js', new Date());
 
           gtag('config', 'G-DECWT3BZWG');
-        </script>
+        </script -->
       </html>`
       );
     }

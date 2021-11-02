@@ -2,13 +2,17 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import queryClient from './api/queryClient';
+import useGoogleAnalytics from './libs/use-analytics';
 
 import Home from './Home';
 import About from './About';
 
 import './App.css';
 
-const App = () => (
+const App = () => {
+  useGoogleAnalytics();
+
+  return (
   <QueryClientProvider client={queryClient}>
     <Switch>
       <Route exact path="/" component={Home} />
@@ -16,6 +20,6 @@ const App = () => (
       <Route exact path="/:profileId" component={Home} />
     </Switch>
   </QueryClientProvider>
-);
+)};
 
 export default App;

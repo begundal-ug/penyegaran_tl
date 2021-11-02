@@ -5,13 +5,15 @@ import { fetchProfile, fetchRandom } from './api/profiles';
 import BadgeLike from './components/badge-like/like';
 import BadgeOriginalTweet from './components/badge-original-tweet/original-tweet';
 import { useParams } from 'react-router-dom';
+import { sendEvent, sendTwitterShare } from './libs/ga-analytics';
 
 const REFETCH_THRESHOLD = 3
 
 function Home () {
-  const [lastDirection, setLastDirection] = useState('')
-  const swipedGirls = useRef([])  // apparently swiped != removed, so we need 2 arrays to maintain :/
-  const removedGirls = useRef([])
+  const [lastDirection, setLastDirection] = useState('');
+  const [countFetch, setCountFetch] = useState(1);
+  const swipedGirls = useRef([]);  // apparently swiped != removed, so we need 2 arrays to maintain :/
+  const removedGirls = useRef([]);
   const childRefs = useRef({});
   
   const {
@@ -40,33 +42,55 @@ function Home () {
                         ? [...data.pages.flat(), profile] 
                         : [...data.pages.flat()]
                       : []
+
+  const valueDir = (dir) => {
+    return (dir == 'left') ? 'dislike' : 'like';
+  }
   
-  const swiped = (direction, id) => {
-    const girl = allGirls.find((item) => item.id === id);
-    console.log('swiping ', girl);
-    !swipedGirls.current.includes(id) && swipedGirls.current.push(id)
+  const swiped = (direction, key) => {
+    const girl = allGirls.find((item) => item.unique_key === key);
+    // console.log('swiping ', girl);
+    !swipedGirls.current.includes(key) && swipedGirls.current.push(key)
     setLastDirection(direction);
+    sendEvent({
+      category: 'interaction',
+      action: `swipe_${direction}`,
+      label: girl.link_display
+    });
   }
   
   const shouldFetch = () => (allGirls.length - removedGirls.current.length) === REFETCH_THRESHOLD
   
   const outOfFrame = (id) => {
     const person = allGirls.find((item) => item.id === id);
-    console.log('left the screen', person)
+    // console.log('left the screen', person);
 
     swipedGirls.current.splice(swipedGirls.current.indexOf(id), 1)
     removedGirls.current.push(id);
     console.log(`Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
 
     if ( shouldFetch() && ( !isFetching || !isFetchingNextPage ) ) {
-      console.log(`GET MORE GIRLS! Total: ${allGirls.length}, removed: ${removedGirls.current.length}.`)
-      fetchNextPage()
+      const newCount = countFetch + 1;
+      setCountFetch(newCount);
+      console.log(`GET MORE GIRLS on Page ${newCount}!`);
+      sendEvent({
+        category: 'interaction',
+        action: 'refetch',
+        label: `page_${countFetch}`
+      });
+      fetchNextPage();
     }
   }
 
   const swipe = async (dir) => {
+
     const currentGirl = getCurrentlyShownGirl()
     !!currentGirl && childRefs.current[currentGirl.unique_key].current.swipe(dir)
+    sendEvent({
+      category: 'interaction',
+      action: `click_${valueDir(dir)}`,
+      label: currentGirl.link_display,
+    });
   }
 
   const getCurrentlyShownGirl = () => {
@@ -77,7 +101,7 @@ function Home () {
 
   const onShareTweet = () => {
     const currentGirl = getCurrentlyShownGirl()
-    console.log("Hit twitter URL: ", currentGirl.link_display )
+    console.log("Hit twitter URL: ", currentGirl.link_display);
     
     const url = buildTweetIntentUrl({
       text : "seger nih, cekidot di",
@@ -86,6 +110,7 @@ function Home () {
       url : `https://penyegaran.ml/${currentGirl.id}`,
       hashtags: "penyegaran_ml"
     })
+    sendTwitterShare(currentGirl.link_display);
 
     window.open(url, '_blank')
   }
@@ -143,13 +168,12 @@ function Home () {
 
           <div className="buttons jc-space-between">
             <button className="button dislike" onClick={ () => swipe('left') }>👎</button>
-            <button className="button tweet" onClick={ onShareTweet }>Share on Twitter</button>
+            <button className="button tweet" onClick={ onShareTweet }>Bagikan di Twitter</button>
             <button className="button like" onClick={ () => swipe('right') }>👍</button>
           </div>
 
-          <h2 className='infoText'>
-            {lastDirection ? `You swiped ${lastDirection}` : 'Swipe card to get started'}
-          </h2>
+          { !lastDirection && <h2 className='infoText'>Geser gambar untuk memulai</h2>}
+
           <footer>
             <p>
               Copyright &copy; Allah SWT dengan segala keindahan ciptaan-Nya.
