@@ -13,7 +13,7 @@ function pickRandom(arr, n) {
         result[n] = arr[x in taken ? taken[x] : x];
         taken[x] = --len in taken ? taken[len] : len;
     }
-    return result.map( res => ({...res, id: short.generate() }));
+    return result.map( res => ({...res, unique_key: short.generate() }));
 }
 
 const getRandom = async (n = 8) => {
@@ -40,7 +40,7 @@ const getRandomNew = async (n = 8) => {
 const getProfileById = async(id) => {
     const profile = rawNew.find((item) => item.id === (+id) )
     return !!profile 
-        ? profile 
+        ? {...profile, unique_key: short.generate() } 
         : { error: `cannot find profile ${id}` }
 }
 

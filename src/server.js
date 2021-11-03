@@ -60,7 +60,7 @@ server
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta charset="utf-8" />
 
-            <title>@Penyegaran_TL</title>
+            <title>👩 Penyegaran Timeline</title>
 
             <link rel="apple-touch-icon" sizes="192x192" href="https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png">
             <link rel="mask-icon" sizes="any" href="https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89d5.svg" color="#1da1f2">
@@ -70,7 +70,7 @@ server
             <meta name="title" content="Penyegaran TL">
             <meta name="description" content="Kurasi koleksi @penyegaran_tl di ujung jarimu">
             <meta name="keywords" content="twitter, penyegaran_tl, igo">
-            <meta name="robots" content="noindex, nofollow">
+            <meta name="robots" content="all">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="language" content="Indonesia">
             <meta name="author" content="Begundal UG">

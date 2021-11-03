@@ -62,7 +62,7 @@ body {
   /* --night-dim-bold-tw: #141d26; */
   --night-dim-bold-tw: #151e29;
   --green-tw: #00ba7c;
-  --green-light-tw: rgba(0, 186, 124, 0.2);
+  --green-light-tw: rgba(0, 186, 124, 0.15);
   --red-tw: #f91880;
-  --red-light-tw: rgba(249, 24, 128, 0.2);
+  --red-light-tw: rgba(249, 24, 128, 0.15);
 }

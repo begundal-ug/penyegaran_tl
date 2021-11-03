@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useQuery, useInfiniteQuery } from 'react-query';
 import TinderCard from './libs/react-tinder-card';
-import { fetchRandom } from './api/profiles';
-import Like from './components/like/like';
+import { fetchProfile, fetchRandom } from './api/profiles';
+import BadgeLike from './components/badge-like/like';
+import BadgeOriginalTweet from './components/badge-original-tweet/original-tweet';
+import { useParams } from 'react-router-dom';
 import { sendEvent, sendTwitterShare } from './libs/ga-analytics';
 
 const REFETCH_THRESHOLD = 3
@@ -27,17 +29,28 @@ function Home () {
         pageParams: [...data.pageParams].reverse()
       }),
   })
+
+  const { profileId } = useParams();
   
-  const allGirls = data && ('pages' in data) ? data.pages.flat() : [];
+  const { data: profile } = useQuery(
+    ['profiles'],
+    () => !!profileId ? fetchProfile( profileId ) : false,
+    )
+  
+  const allGirls = data && ('pages' in data)  
+                      ?  profile 
+                        ? [...data.pages.flat(), profile] 
+                        : [...data.pages.flat()]
+                      : []
 
   const valueDir = (dir) => {
     return (dir == 'left') ? 'dislike' : 'like';
   }
   
-  const swiped = (direction, id) => {
-    const girl = allGirls.find((item) => item.id === id);
+  const swiped = (direction, key) => {
+    const girl = allGirls.find((item) => item.unique_key === key);
     // console.log('swiping ', girl);
-    !swipedGirls.current.includes(id) && swipedGirls.current.push(id)
+    !swipedGirls.current.includes(key) && swipedGirls.current.push(key)
     setLastDirection(direction);
     sendEvent({
       category: 'interaction',
@@ -70,8 +83,9 @@ function Home () {
   }
 
   const swipe = async (dir) => {
-    const currentGirl = getCurrentlyShownGirl();
-    !!currentGirl && childRefs.current[currentGirl.id].current.swipe(dir);
+
+    const currentGirl = getCurrentlyShownGirl()
+    !!currentGirl && childRefs.current[currentGirl.unique_key].current.swipe(dir)
     sendEvent({
       category: 'interaction',
       action: `click_${valueDir(dir)}`,
@@ -90,10 +104,10 @@ function Home () {
     console.log("Hit twitter URL: ", currentGirl.link_display);
     
     const url = buildTweetIntentUrl({
-      text : "seger nih, cekidot banyak banget di",
+      text : "seger nih, cekidot di",
       image : currentGirl.link_display,
       via : "penyegaran_tl",
-      url : "https://penyegaran.ml",
+      url : `https://penyegaran.ml/${currentGirl.id}`,
       hashtags: "penyegaran_ml"
     })
     sendTwitterShare(currentGirl.link_display);
@@ -111,7 +125,7 @@ function Home () {
   )
 
   for (const girl of (allGirls || [])) {
-    childRefs.current[girl.id] = childRefs.current[girl.id] || React.createRef();
+    childRefs.current[girl.unique_key] = childRefs.current[girl.unique_key] || React.createRef();
   }
 
   return (
@@ -122,7 +136,7 @@ function Home () {
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <h1>@Penyegaran_TL</h1>
+          <h1>Penyegaran Timeline</h1>
 
           <div className='cardContainer'>
             {/* last card ketika sudah semua diswipe */}
@@ -137,30 +151,41 @@ function Home () {
               <TinderCard
                 className='swipe'
                 preventSwipe={['down']}
-                key={girl.id}
-                ref={childRefs.current[girl.id]}
-                onSwipe={(dir) => swiped(dir, girl.id)}
-                onCardLeftScreen={() => outOfFrame(girl.id)}
+                key={girl.unique_key}
+                ref={childRefs.current[girl.unique_key]}
+                onSwipe={(dir) => swiped(dir, girl.unique_key)}
+                onCardLeftScreen={() => outOfFrame(girl.unique_key)}
               >
                 <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
-                  <Like count={girl.likes} />
+                  <div className='badge-container'>
+                    <BadgeLike count={girl.likes} />
+                    <BadgeOriginalTweet link={girl.link} accountName="penyegaran_tl" />
+                  </div>
                 </div>
               </TinderCard>
             )}
           </div>
 
-          <div className='buttons'>
-            <button className="dislike" onClick={ () => swipe('left') }>MEH 👎</button>
-            <button className="like" onClick={ () => swipe('right') }>YEAH 👍</button>
+          <div className="buttons jc-space-between">
+            <button className="button dislike" onClick={ () => swipe('left') }>👎</button>
+            <button className="button tweet" onClick={ onShareTweet }>Bagikan di Twitter</button>
+            <button className="button like" onClick={ () => swipe('right') }>👍</button>
           </div>
 
-          <div className='buttons'>
-            <button className="tweet" onClick={ onShareTweet }>Bagikan di Twitter</button>
-          </div>
-          
-          <h2 className='infoText'>
-            {lastDirection ? `` : 'Geser gambar untuk memulai'}
-          </h2>
+          { !lastDirection && <h2 className='infoText'>Geser gambar untuk memulai</h2>}
+
+          <footer>
+            <p>
+              Copyright &copy; Allah SWT dengan segala keindahan ciptaan-Nya.
+              Seluruh kode aplikasi ini tersedia secara secara sumber terbuka dan dapat dilihat, dipelajari, diambil dan digunakan di Github. 
+              Seluruh data dan gambar diambil dari timeline <a href="https://twitter.com/penyegaran_tl" target="_blank">@penyegaran_tl</a> di Twitter. 
+              Jika Anda ingin foto Anda diambil dari website ini, silakan japri langsung dengan pembuat via Twitter<br/>
+            </p>
+            <p>
+              Sebuah karya kurang kerjaan persembahan dari <a href="https://twitter.com/ans4175" target="_blank">@ans4175</a> dengan <a href="https://twitter.com/anwari888" target="_blank">@anwari888</a>, yang ingin berkarya dan belajar saja. 
+              Kami tidak berafiliasi dengan admin dari @penyegaran_tl.
+            </p>
+          </footer>
         </>
       )}
     </div>

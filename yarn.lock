@@ -1974,10 +1974,10 @@ babel-preset-jest@^26.6.2:
     babel-plugin-jest-hoist "^26.6.2"
     babel-preset-current-node-syntax "^1.0.0"
 
-babel-preset-razzle@^4.0.6:
-  version "4.2.2"
-  resolved "https://registry.npmjs.org/babel-preset-razzle/-/babel-preset-razzle-4.2.2.tgz"
-  integrity sha512-sw5PnAlTSCLEiy7119N1CkgkiYDVIFSa3BGk2JLFB4vlUDlILZtZ6BgH6gXzQDDpnH+MG8NdgKuNG+Rq6eFnbw==
+babel-preset-razzle@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/babel-preset-razzle/-/babel-preset-razzle-4.2.6.tgz#3bad9bdc7fdb6d8d19549f8917faf54ac788c673"
+  integrity sha512-ahXKOYRcwAl7TzYcIQ+3wJ8ePZBkUAMOfLgXpeq6HeqkvAYgccwLH88+jm46cTnj2fpeIvg87Zk9bJ4Ut31b5A==
   dependencies:
     "@babel/core" "^7.11.1"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7324,10 +7324,10 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-razzle-dev-utils@^4.0.6:
-  version "4.2.2"
-  resolved "https://registry.npmjs.org/razzle-dev-utils/-/razzle-dev-utils-4.2.2.tgz"
-  integrity sha512-a6tQI0zCR4VEIZeDLJ6E4u0iaFYOqFk14Id8dUXFt73jZSPEm4Fz/TGwBAqP3C63UGxUHnpb6JQGCaKiwiezpA==
+razzle-dev-utils@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/razzle-dev-utils/-/razzle-dev-utils-4.2.6.tgz#52ff899fa9a5251d078002ba4f795f51141eb7de"
+  integrity sha512-WPsJi5UF6q/AqWTssXlVnKTace0V3w1e7rFtYHEARUktYca1WNzBpZvI24EKhrh4r86VvahSasFD6HMAr4dXdQ==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     chalk "^4.1.0"
@@ -7341,15 +7341,15 @@ razzle-dev-utils@^4.0.6:
     sockjs-client "~1.4.0"
     strip-ansi "^6.0.0"
 
-razzle-start-server-webpack-plugin@4.2.2:
-  version "4.2.2"
-  resolved "https://registry.npmjs.org/razzle-start-server-webpack-plugin/-/razzle-start-server-webpack-plugin-4.2.2.tgz"
-  integrity sha512-Gi/1DH/Hg1hBRz9dTtH6Vnj4tH6EEa1sWv81KZHaP2h4zWqWC45uJVixvGZhDuNjnaoNIE9PFKNvy/jQusnrKA==
+razzle-start-server-webpack-plugin@4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/razzle-start-server-webpack-plugin/-/razzle-start-server-webpack-plugin-4.2.6.tgz#b4b4b5cf1b7f66c284266e9474ecab8a148419ce"
+  integrity sha512-2u4PFutykf7xmRV/5E/f+vYCIeyT9hvBnQQMXUJZI2Zs6kpd0Na7L7m5C2AckXajWpcUNTG3So2e7bxXkn3c5g==
 
-razzle@^4.0.6:
-  version "4.2.2"
-  resolved "https://registry.npmjs.org/razzle/-/razzle-4.2.2.tgz"
-  integrity sha512-h3l8A70ACzoNUr+MYK9ldmASNJX9ASDxnXekh05twtgzI/811+YBDk/mCybTWUU56rkvR9hJZfPryO2mQdCdxg==
+razzle@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/razzle/-/razzle-4.2.6.tgz#7189bcea7eb766ca0f9f9d33ed1c7e512d887242"
+  integrity sha512-wA7i8gEu8TlOjSVwqykBtpPWHDzHQnQ3w9IEBTuMjyJNdyqURc1Fiym8E2xRi7XbGUiGh20OnntdpUC3+z31fw==
   dependencies:
     "@babel/plugin-transform-modules-commonjs" "^7.12.1"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.4.3"
@@ -7377,7 +7377,7 @@ razzle@^4.0.6:
     postcss-load-config "^3.0.0"
     postcss-loader "^4.2.0"
     process "^0.11.10"
-    razzle-start-server-webpack-plugin "4.2.2"
+    razzle-start-server-webpack-plugin "4.2.6"
     react-dev-utils "^11.0.4"
     react-refresh "^0.9.0"
     resolve "^1.17.0"
