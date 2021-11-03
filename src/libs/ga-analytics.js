@@ -1,4 +1,4 @@
-const ReactGA = require("react-ga");
+import ReactGA from "react-ga4"
 
 const TRACKING_ID = "G-DECWT3BZW"
 
@@ -9,31 +9,26 @@ function init() {
 }
 
 function sendEvent(payload) {
-  ReactGA.event(payload);
+  ReactGA.event({...payload, nonInteraction: false});
 }
 
 function sendPageview(path) {
-  ReactGA.set({ page: path })
-  ReactGA.pageview(path);
+  ReactGA.send({ hitType: "pageview", page: path });
 }
 
-function sendModalview(path) {
-  ReactGA.modalview(path);
+// Reference https://developers.google.com/gtagjs/reference/event#page_view
+function sendShareOnTwitter(link_display) {
+  ReactGA.event({ category: 'Twitter', action: 'share', label: link_display, value: 30, nonInteraction: false });
 }
 
-function sendTwitterShare(link_display) {
-  ReactGA.ga('send', 'social', 'Twitter', 'tweet', link_display);
-}
-
-function sendTwitterOriginal(link_display) {
-  ReactGA.ga('send', 'social', 'Twitter', 'open', link_display);
+function sendOpenOriginalTweet(link_display) {
+  ReactGA.event({ category: 'Twitter', action: 'open', label: link_display, value: 10, nonInteraction: true });
 }
 
 module.exports = {
   init,
   sendEvent,
   sendPageview,
-  sendModalview,
-  sendTwitterShare,
-  sendTwitterOriginal
+  sendShareOnTwitter,
+  sendOpenOriginalTweet
 }
