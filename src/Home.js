@@ -4,6 +4,7 @@ import TinderCard from './libs/react-tinder-card';
 import { fetchProfile, fetchRandom } from './api/profiles';
 import BadgeLike from './components/badge-like/like';
 import BadgeOriginalTweet from './components/badge-original-tweet/original-tweet';
+import Footer from './components/footer';
 import { useParams } from 'react-router-dom';
 import { sendEvent, sendTwitterShare } from './libs/ga-analytics';
 
@@ -174,18 +175,7 @@ function Home () {
 
           { !lastDirection && <h2 className='infoText'>Geser gambar untuk memulai</h2>}
 
-          <footer>
-            <p>
-              Copyright &copy; Allah SWT dengan segala keindahan ciptaan-Nya.
-              Seluruh kode aplikasi ini tersedia secara secara sumber terbuka dan dapat dilihat, dipelajari, diambil dan digunakan di Github. 
-              Seluruh data dan gambar diambil dari timeline <a href="https://twitter.com/penyegaran_tl" target="_blank">@penyegaran_tl</a> di Twitter. 
-              Jika Anda ingin foto Anda diambil dari website ini, silakan japri langsung dengan pembuat via Twitter<br/>
-            </p>
-            <p>
-              Sebuah karya kurang kerjaan persembahan dari <a href="https://twitter.com/ans4175" target="_blank">@ans4175</a> dengan <a href="https://twitter.com/anwari888" target="_blank">@anwari888</a>, yang ingin berkarya dan belajar saja. 
-              Kami tidak berafiliasi dengan admin dari @penyegaran_tl.
-            </p>
-          </footer>
+          <Footer />
         </>
       )}
     </div>
