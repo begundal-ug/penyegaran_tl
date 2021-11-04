@@ -7436,10 +7436,10 @@ react-error-overlay@^6.0.7, react-error-overlay@^6.0.9:
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
-react-ga@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/react-ga/-/react-ga-3.3.0.tgz"
-  integrity sha512-o8RScHj6Lb8cwy3GMrVH6NJvL+y0zpJvKtc0+wmH7Bt23rszJmnqEQxRbyrqUzk9DTJIHoP42bfO5rswC9SWBQ==
+react-ga4@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-ga4/-/react-ga4-1.4.0.tgz#cee869f76c554a81790b8e2ad7f678fdd5e8cf71"
+  integrity sha512-pF74ndJMf+cR44s1QlGfUc+L1YlC2UKsJ/r6YL+iWlFLoYd/e3AWbRec4A4EXCzPD+c9FuBiVQDO/0ZcLWloDg==
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"

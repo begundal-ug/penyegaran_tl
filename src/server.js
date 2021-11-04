@@ -81,15 +81,7 @@ server
             <div id="root">${markup}</div>
             ${jsScriptTagsFromAssets(assets, 'client', ' defer crossorigin')}
         </body>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DECWT3BZWG"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-DECWT3BZWG');
-        </script>
+        
       </html>`
       );
     }

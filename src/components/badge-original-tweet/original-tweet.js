@@ -9,7 +9,7 @@ const Bird = ( ) =>
   </div>
   
 
-export default ({link, accountName}) => 
-  <a className="badge original-tweet" href={link} target="_blank">
+export default ({link, accountName, onClick}) => 
+  <a className="badge original-tweet" href={link} target="_blank" onClick={onClick}>
     <Bird /><span className="count">@{accountName}</span>
   </a>

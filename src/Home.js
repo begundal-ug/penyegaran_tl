@@ -6,7 +6,7 @@ import BadgeLike from './components/badge-like/like';
 import BadgeOriginalTweet from './components/badge-original-tweet/original-tweet';
 import Footer from './components/footer';
 import { useParams } from 'react-router-dom';
-import { sendEvent, sendTwitterShare } from './libs/ga-analytics';
+import { sendEvent, sendShareOnTwitter, sendOpenOriginalTweet } from './libs/ga-analytics';
 
 const REFETCH_THRESHOLD = 3
 
@@ -111,9 +111,13 @@ function Home () {
       url : `https://penyegaran.ml/${currentGirl.id}`,
       hashtags: "penyegaran_ml"
     })
-    sendTwitterShare(currentGirl.link_display);
+    sendShareOnTwitter(currentGirl.link_display);
 
     window.open(url, '_blank')
+  }
+
+  const seeOriginalTweet = (link_display) => {
+    sendOpenOriginalTweet(link_display)
   }
 
   const buildTweetIntentUrl = ({text, url, image, via, hashtags}) => (
@@ -160,7 +164,7 @@ function Home () {
                 <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
                   <div className='badge-container'>
                     <BadgeLike count={girl.likes} />
-                    <BadgeOriginalTweet link={girl.link} accountName="penyegaran_tl" />
+                    <BadgeOriginalTweet link={girl.link} accountName="penyegaran_tl" onClick={ () => { seeOriginalTweet(girl.link_display)} } />
                   </div>
                 </div>
               </TinderCard>
