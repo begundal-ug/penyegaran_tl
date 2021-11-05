@@ -9,7 +9,7 @@
     "test": "razzle test --env=jsdom",
     "export": "razzle export",
     "deploy": "vercel --prod",
-    "build-deploy": "razzle build --noninteractive && vercel --prod"
+    "build-deploy": "NODE_ENV=production razzle build --noninteractive && vercel --prod"
   },
   "dependencies": {
     "axios": "^0.21.4",
