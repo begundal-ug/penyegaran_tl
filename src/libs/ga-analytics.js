@@ -16,7 +16,6 @@ function sendPageview(path) {
   ReactGA.send({ hitType: "pageview", page: path });
 }
 
-// Reference https://developers.google.com/gtagjs/reference/event#page_view
 function sendShareOnTwitter(link_display) {
   ReactGA.event({ category: 'Twitter', action: 'share', label: link_display, value: 30, nonInteraction: false });
 }
