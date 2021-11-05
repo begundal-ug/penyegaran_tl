@@ -116,7 +116,9 @@ function Home () {
     window.open(url, '_blank')
   }
 
-  const seeOriginalTweet = (link_display) => {
+  const seeOriginalTweet = (link_display, event) => {
+    event.stopPropagation();
+    console.log("seeOriginalTweet", link_display)
     sendOpenOriginalTweet(link_display)
   }
 
@@ -164,7 +166,7 @@ function Home () {
                 <div style={{ backgroundImage: `url(${girl.img})` }} className='card'>
                   <div className='badge-container'>
                     <BadgeLike count={girl.likes} />
-                    <BadgeOriginalTweet link={girl.link} accountName="penyegaran_tl" onClick={ () => { seeOriginalTweet(girl.link_display)} } />
+                    <BadgeOriginalTweet link={girl.link} accountName="penyegaran_tl" onClick={ (e) => { seeOriginalTweet(girl.link_display, e) }} />
                   </div>
                 </div>
               </TinderCard>
